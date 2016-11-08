@@ -408,6 +408,44 @@ class Recursion(Test):
             f(10)
 
         return perf.perf_counter() - t0
+####
+class Tak_Recursion(Test):
+
+    version = 2.0
+    operations = 5
+    rounds = 100000
+
+    def test(self):
+
+        global tak
+
+        def tak(x,y,z):
+
+            if x >= y:
+                return z
+            else:
+                return tak(tak(x-1 ,y,z), tak(y-1,z,x), tak(z-1,x,y))
+
+        for i in xrange(self.rounds):
+            tak(18, 12, 6)
+            tak(18, 12, 6)
+            tak(18, 12, 6)
+            tak(18, 12, 6)
+            tak(18, 12, 6)
+
+    def calibrate(self):
+
+        global tak
+
+        def tak(x,y,z):
+
+            if x >= y:
+                return z
+            else:
+                return tak(tak(x-1 ,y,z), tak(y-1,z,x), tak(z-1,x,y))
+
+        for i in xrange(self.rounds):
+            pass
 
 
 # Test to make Fredrik happy...
